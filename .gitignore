@@ -1,0 +1,5 @@
+# Ignore Bundler meta
+.bundle
+
+# I don't want to tell other people they shoud be using gemsets.
+.ruby-gemset
