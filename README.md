@@ -47,7 +47,9 @@ get '/auth/assembly/callback' do
 end
 ```
 
-If the school has decided to allow it access to their data, the Assembly Platform will call your application back supplying a temporary `code` that your application may then exchange for a [JWT token](https://jwt.io/) that is allowed to access the scopes of data that your app requested in the first step and a refresh token that you'll need to store in order to maintain the validity of the JWT token (they currentlyu expire after 30 days but _this period of time will drop significantly in the near future_). The sample Sinatra app does that, very simple, like this:
+If the school has decided to allow it access to their data, the Assembly Platform will call your application back supplying a temporary `code` that your application may then exchange for a [JWT token](https://jwt.io/) that is allowed to access the scopes of data that your app requested in the first step and a refresh token that you'll need to store in order to maintain the validity of the JWT token (they currently expire after 30 days but _this period of time will drop significantly in the near future_).
+
+The sample Sinatra app does that, very simple, like this:
 
 ```ruby
 ...
