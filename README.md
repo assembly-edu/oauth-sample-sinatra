@@ -23,7 +23,7 @@ The OAuth Flow
 
 When you hit [the example app](http://localhost:4567/) in your browser the following things will happen:
 
-* **Immediately re-direct you to the Assembly Platform Sandbox** _which is caused by this code in the example app:_
+* **You'll be immediately re-direct to the Assembly Platform Sandbox** _which is caused by this code in the example app:_
 
 ```ruby
 get '/' do
@@ -33,9 +33,11 @@ get '/' do
 end
 ```
 
-In this code snippet first generates a random string which you should send along with your request to protect against CSRF. Then we enumerates the scopes that your application is asking for. Finally, we redirect the browser to the Assembly Platform. *This part of the flow would normally be completed by the school's data manager or such a responsible person* so, in order to test, you'll need to login to as your test school.
+In this code snippet first generates a random string which you should send along with your request to protect against CSRF. Then we enumerate the scopes that the application is asking for. Finally, we redirect the browser to the Assembly Platform. *This part of the flow would normally be completed by the school's data manager or such a responsible person* so, in order to test, you'll need to login to as your test school.
 
-* **Once you've logged in as the school (or, in production, someone at the school has logged in)** _The Assembly Platform will call your app back:_
+It's important to note that this is really skipping a step: In real operation you'll probably want part of the registration/sign-up flow of your application to re-direct the school user to the Assembly Platform once you've gathered some information from them to create their account etc. Here, we've jumped over that step in order to focus the sample purely on the OAuth flow.
+
+* **Once you've logged in as the school (or, in production, someone at the school has logged in), the Assembly Platform will call your app back:**
 
 ```ruby
 get '/auth/assembly/callback' do
@@ -45,7 +47,7 @@ get '/auth/assembly/callback' do
 end
 ```
 
-If the school has decided to allow it access to their data, the Assembly Platform will call your application back supplying a `code` that you may then exchange for a [JWT token](https://jwt.io/) and a refresh token that is allowed to access the scopes of data that your app requested in the first step. The sample Sinatra app does that, very simple, like this:
+If the school has decided to allow it access to their data, the Assembly Platform will call your application back supplying a temporary `code` that your application may then exchange for a [JWT token](https://jwt.io/) that is allowed to access the scopes of data that your app requested in the first step and a refresh token that you'll need to store in order to maintain the validity of the JWT token (they currentlyu expire after 30 days but _this period of time will drop significantly in the near future_). The sample Sinatra app does that, very simple, like this:
 
 ```ruby
 ...
