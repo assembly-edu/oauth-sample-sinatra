@@ -10,9 +10,13 @@ APP_ID     = ENV['APP_ID']
 APP_SECRET = ENV['APP_SECRET']
 CALLBACK   = url_encode('http://localhost:4567/auth/assembly/callback')
 
-get '/' do
+get '/' do 
+	erb :index	
+end
+
+get '/auth_me' do
 	state  = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-	scopes = %w(students teaching_groups staff_members).join('+')
+	scopes = %w(students teaching_groups).join('+')
 	redirect to("https://platform-sandbox.assembly.education/oauth/authorize?redirect_uri=#{CALLBACK}&client_id=#{APP_ID}&scope=#{scopes}&state=#{state}")
 end
 
@@ -24,7 +28,7 @@ get '/auth/assembly/callback' do
 		{ Accept: 'application/json', Authorization: basic_auth_header(APP_ID, APP_SECRET) }
 
 	json = JSON.parse(response.body)
-	"#{JSON.pretty_generate(json)}"
+	erb :authed, locals: { json: json }
 end
 
 def basic_auth_header(id, secret)

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Assembly OAuth Flow Example</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+  </head>
+  <body class='container'>
+    <h2>Sign-Up Accepted By User:</h2>
+    <form action='auth_me' method='get'>
+      <ul class='unstyled'>
+        <% json.each_pair do |k,v| %>
+        <li><b><%= k %>: </b> <%= v %></li>
+        <% end %>
+      </ul>
+    </form>
+  </body>
+</html>

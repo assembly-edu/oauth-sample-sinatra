@@ -23,10 +23,10 @@ The OAuth Flow
 
 When you hit [the example app](http://localhost:4567/) in your browser the following things will happen:
 
-* **You'll be immediately re-direct to the Assembly Platform Sandbox** _which is caused by this code in the example app:_
+* **Click the 'SIGN UP!' button and you'll be re-direct to the Assembly Platform Sandbox** _which is caused by this code in the example app:_
 
 ```ruby
-get '/' do
+get '/auth_me' do
 	state  = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
 	scopes = %w(students teaching_groups staff_members).join('+')
 	redirect to("https://platform-sandbox.assembly.education/oauth/authorize?redirect_uri=#{CALLBACK}&client_id=#{APP_ID}&scope=#{scopes}&state=#{state}")
