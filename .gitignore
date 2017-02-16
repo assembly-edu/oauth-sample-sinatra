@@ -3,3 +3,7 @@
 
 # I don't want to tell other people they shoud be using gemsets.
 .ruby-gemset
+
+# Ignore IntelliJ metadata
+.idea
+*.iml
