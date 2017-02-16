@@ -11,7 +11,8 @@ use Rack::Session::Pool, :expire_after => 10000
 APP_ID       = ENV['APP_ID']
 APP_SECRET   = ENV['APP_SECRET']
 CALLBACK     = url_encode('http://localhost:4567/auth/assembly/callback')
-PLATFORM_URI = 'https://platform-sandbox.assembly.education/'
+#PLATFORM_URI = 'https://platform-sandbox.assembly.education/'
+PLATFORM_URI = 'http://platform.lvh.me:3000/'
 
 get '/' do
   # You should implement your own logic to check whether a school has paid for your app before allowing them to authorize
@@ -28,7 +29,7 @@ get '/auth_me' do
 end
 
 get '/auth/assembly/callback' do
-  auth_code = params['code'] # This code may be exchanged for an access and refresh token scoped for only the authorising school.
+  auth_code = params['code']  # This code may be exchanged for an access and refresh token scoped for only the authorizing school.
   csrf_code = params['state'] # In your real app you should verify this code matches what you sent.
   error     = params['error']
   error_msg = params['error_description']
