@@ -10,7 +10,7 @@
     <form action='auth_me' method='get'>
       <ul class='unstyled'>
         <% json.each_pair do |k,v| %>
-        <li><b><%= k %>: </b> <%= v %></li>
+        <li><b><%= k %>: </b> <span style="word-wrap: break-word;"><%= v %></span></li>
         <% end %>
       </ul>
     </form>

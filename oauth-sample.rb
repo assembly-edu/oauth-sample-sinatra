@@ -11,8 +11,7 @@ use Rack::Session::Pool, :expire_after => 10000
 APP_ID       = ENV['APP_ID']
 APP_SECRET   = ENV['APP_SECRET']
 CALLBACK     = url_encode('http://localhost:4567/auth/assembly/callback')
-#PLATFORM_URI = 'https://platform-sandbox.assembly.education/'
-PLATFORM_URI = 'http://platform.lvh.me:3000/'
+PLATFORM_URI = 'https://platform-sandbox.assembly.education/'
 
 get '/' do
   # You should implement your own logic to check whether a school has paid for your app before allowing them to authorize
